@@ -21,13 +21,27 @@ func (r *Request) Option(key string) (res string) {
 	return
 }
 
+type result struct {
+	network string
+	count   int
+}
+
 func (r *Request) Count(networks ...string) (res map[string]int) {
-	res = make(map[string]int)
+	var counts = make(chan *result)
+	defer close(counts)
 	
 	for _, net := range networks {
 		if counter, ok := counters[net]; ok {
-			res[net] = counter.Count(r)
+			go func() {
+				counts <- &result{net, counter.Count(r)}
+			}()
 		}
+	}
+
+	res = make(map[string]int)
+	for i := 0 ; i < len(networks); i++ {
+		partial := <-counts
+		res[partial.network] = partial.count
 	}
 
 	return
@@ -35,7 +49,7 @@ func (r *Request) Count(networks ...string) (res map[string]int) {
 
 func (r *Request) CountAll() map[string]int {
 	networks := []string{}
-	for net, _ := range(counters) {
+	for net, _ := range counters {
 		networks = append(networks, net)
 	}
 

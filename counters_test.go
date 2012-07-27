@@ -26,7 +26,7 @@ func TestRequestCountForCounters(t *testing.T) {
 	}
 }
 
-func BenchmarkCounters(b *testing.B) {
+func BenchmarkRequestCount(b *testing.B) {
 	b.StopTimer()
 	r := NewRequest("http://areyoufuckingcoding.me/", nil)
 	b.StartTimer()
