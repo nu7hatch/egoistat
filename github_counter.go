@@ -1,12 +1,12 @@
 package egoist
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"encoding/json"
 )
 
-type GithubCounter struct {}
+type GithubCounter struct{}
 
 type githubFeed struct {
 	Watchers int

@@ -28,7 +28,7 @@ type result struct {
 
 func (r *Request) Count(networks ...string) (res map[string]int) {
 	res = make(map[string]int)
-	if (len(r.Url()) == 0) {
+	if len(r.Url()) == 0 {
 		return
 	}
 
@@ -45,7 +45,7 @@ func (r *Request) Count(networks ...string) (res map[string]int) {
 		}
 	}
 
-	for i := 0 ; i < numJobs; i++ {
+	for i := 0; i < numJobs; i++ {
 		partial := <-counts
 		res[partial.network] = partial.count
 	}

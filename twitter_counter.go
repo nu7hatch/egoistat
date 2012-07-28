@@ -1,12 +1,12 @@
 package egoist
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"encoding/json"
 )
 
-type TwitterCounter struct {}
+type TwitterCounter struct{}
 
 type twitterFeed struct {
 	Count int
@@ -21,7 +21,7 @@ func (c *TwitterCounter) Count(r *Request) int {
 	var dec *json.Decoder
 	var err error
 	var data twitterFeed
-	
+
 	if resp, err = http.Get(c.urlFor(r.Url())); err != nil {
 		return 0
 	}

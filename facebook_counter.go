@@ -1,12 +1,12 @@
 package egoist
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"encoding/json"
 )
 
-type FacebookCounter struct {}
+type FacebookCounter struct{}
 
 type facebookFeedData struct {
 	Shares int
@@ -22,7 +22,7 @@ func (c *FacebookCounter) Count(r *Request) (count int) {
 	var err error
 	var data map[string]facebookFeedData
 	var url = r.Url()
-	
+
 	if resp, err = http.Get(c.urlFor(url)); err != nil {
 		return 0
 	}

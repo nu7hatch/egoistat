@@ -1,13 +1,13 @@
 package egoist
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"encoding/json"
 	"strings"
 )
 
-type GooglePlusCounter struct {}
+type GooglePlusCounter struct{}
 
 type googlePlusFeed struct {
 	Result googlePlusFeedResult
@@ -31,10 +31,10 @@ func (c *GooglePlusCounter) url() string {
 
 func (c *GooglePlusCounter) postDataFor(url string) string {
 	return fmt.Sprintf(
-		"[{\"method\":\"pos.plusones.get\",\"id\":\"p\",\"params\":{" +
-		"\"nolog\":true,\"id\":\"%s\",\"source\":\"widget\",\"userId\":" +
-		"\"@viewer\",\"groupId\":\"@self\"},\"jsonrpc\":\"2.0\",\"key\":" +
-		"\"p\",\"apiVersion\":\"v1\"}]", url,
+		"[{\"method\":\"pos.plusones.get\",\"id\":\"p\",\"params\":{"+
+			"\"nolog\":true,\"id\":\"%s\",\"source\":\"widget\",\"userId\":"+
+			"\"@viewer\",\"groupId\":\"@self\"},\"jsonrpc\":\"2.0\",\"key\":"+
+			"\"p\",\"apiVersion\":\"v1\"}]", url,
 	)
 }
 
@@ -44,11 +44,11 @@ func (c *GooglePlusCounter) Count(r *Request) int {
 	var err error
 	var data []googlePlusFeed
 	var postData = strings.NewReader(c.postDataFor(r.Url()))
-	
+
 	if resp, err = http.Post(c.url(), "application/json", postData); err != nil {
 		return 0
 	}
-	
+
 	dec = json.NewDecoder(resp.Body)
 	if err = dec.Decode(&data); err != nil {
 		return 0

@@ -1,12 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/nu7hatch/egoist"
 	"log"
 	"net/http"
 	"net/url"
 	"strings"
-	"encoding/json"
 	"text/template"
 )
 
@@ -29,7 +29,7 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
-	
+
 	request := egoist.NewRequest(url, params)
 	counts := request.Count(networks...)
 
@@ -44,7 +44,7 @@ type countScriptData struct {
 
 func countScriptHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	
+
 	var networks = strings.Split(r.FormValue("n"), ",")
 	var url = r.FormValue("url")
 	var params = transformParams(r.Form)
@@ -53,7 +53,7 @@ func countScriptHandler(w http.ResponseWriter, r *http.Request) {
 	if len(strings.TrimSpace(callback)) > 0 {
 		callback = callback + "()"
 	}
-	
+
 	w.Header().Set("Content-Type", "text/javascript")
 	w.WriteHeader(200)
 

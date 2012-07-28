@@ -2,7 +2,7 @@ package egoist
 
 import "testing"
 
-type TestCounter struct {}
+type TestCounter struct{}
 
 func (c *TestCounter) Count(r *Request) int {
 	return 10
