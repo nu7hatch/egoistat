@@ -27,19 +27,25 @@ type result struct {
 }
 
 func (r *Request) Count(networks ...string) (res map[string]int) {
-	var counts = make(chan *result)
+	res = make(map[string]int)
+	if (len(r.Url()) == 0) {
+		return
+	}
+
+	counts := make(chan *result)
 	defer close(counts)
-	
+
+	numJobs := 0
 	for _, net := range networks {
 		if counter, ok := counters[net]; ok {
-			go func() {
+			numJobs++
+			go func(net string) {
 				counts <- &result{net, counter.Count(r)}
-			}()
+			}(net)
 		}
 	}
 
-	res = make(map[string]int)
-	for i := 0 ; i < len(networks); i++ {
+	for i := 0 ; i < numJobs; i++ {
 		partial := <-counts
 		res[partial.network] = partial.count
 	}
