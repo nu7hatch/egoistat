@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type facebookFeedData struct {
+type facebookFeed struct {
 	Shares int
 }
 
@@ -20,7 +20,7 @@ func (c *FacebookCounter) Count(r *Request) (count int) {
 	var resp *http.Response
 	var dec *json.Decoder
 	var err error
-	var data map[string]facebookFeedData
+	var data map[string]facebookFeed
 	var url = r.Url()
 
 	if resp, err = http.Get(c.urlFor(url)); err != nil {
