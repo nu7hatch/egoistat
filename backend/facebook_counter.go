@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type FacebookCounter struct{}
-
 type facebookFeedData struct {
 	Shares int
 }
+
+type FacebookCounter struct{}
 
 func (c *FacebookCounter) urlFor(url string) string {
 	return fmt.Sprintf("http://graph.facebook.com/?ids=%s", url)

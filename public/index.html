@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Egoistat</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    <meta name="description" content="">
+    <meta name="author" content="Krzysztof Kowalik aka. nu7hatch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="container">
+      <header role="banner">
+        <div class="vessel">
+          <h1 class="logo">Egoistat</h1>
+          <p class="tagline">Social statistics of your website in one place.</p>
+        </div>
+      </header>
+
+      <section role="main">
+        <div class="vessel">
+          <form action="/stat" method="get" id="stat_form">
+            <input type="text" name="url" id="stat_url" value="http://" />
+            <button id="stat_submit">Stat me!</button>
+          </form>
+        </div>
+      </section>
+      
+      <footer role="contentinfo">
+        <div class="vessel">
+          <div class="copyright">
+            Copyright &copy; 2012 by Chris Kowalik a.k.a. <a href="http://nu7hat.ch/">nu7hatch</a><br />
+            <small>All rights reserved.</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+    <script src="/js/libs/backbone-min.js"></script>
+    <script src="/js/libs/underscore-min.js"></script>
+  </body>
+</html>

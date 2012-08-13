@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type TwitterCounter struct{}
-
 type twitterFeed struct {
 	Count int
 }
+
+type TwitterCounter struct{}
 
 func (c *TwitterCounter) urlFor(url string) string {
 	return fmt.Sprintf("http://urls.api.twitter.com/1/urls/count.json?url=%s", url)

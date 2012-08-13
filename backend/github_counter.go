@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-type GithubCounter struct{}
-
 type githubFeed struct {
 	Watchers int
 }
+
+type GithubCounter struct{}
 
 func (c *GithubCounter) urlFor(repoName string) string {
 	return fmt.Sprintf("https://api.github.com/repos/%s", repoName)

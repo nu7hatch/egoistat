@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/nu7hatch/egoist"
+	"github.com/nu7hatch/egoistat/backend"
 	"log"
 	"net/http"
 	"net/url"
@@ -66,6 +66,7 @@ func countScriptHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	http.Handle("/", http.FileServer(http.Dir("./public")))
 	http.HandleFunc("/count.json", countHandler)
 	http.HandleFunc("/count.js", countScriptHandler)
 
