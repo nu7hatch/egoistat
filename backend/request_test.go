@@ -1,4 +1,4 @@
-package egoist
+package egoistat
 
 import "testing"
 

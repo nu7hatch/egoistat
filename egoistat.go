@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"github.com/nu7hatch/egoistat/backend"
 	"log"
 	"net/http"
 	"net/url"
 	"strings"
 	"text/template"
-	"flag"
 )
 
 var Addr string
@@ -38,7 +38,7 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 
-	request := egoist.NewRequest(url, params)
+	request := egoistat.NewRequest(url, params)
 	counts := request.Count(networks...)
 
 	enc := json.NewEncoder(w)
@@ -65,7 +65,7 @@ func countScriptHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/javascript")
 	w.WriteHeader(200)
 
-	request := egoist.NewRequest(url, params)
+	request := egoistat.NewRequest(url, params)
 	counts := request.Count(networks...)
 	data, _ := json.Marshal(counts)
 

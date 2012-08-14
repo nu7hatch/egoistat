@@ -1,4 +1,4 @@
-package egoist
+package egoistat
 
 type Request struct {
 	options map[string]string

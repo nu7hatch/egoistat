@@ -1,4 +1,4 @@
-package egoist
+package egoistat
 
 import (
 	"encoding/json"
@@ -7,8 +7,8 @@ import (
 )
 
 type hackerNewsFeed struct {
-    Hits    int
-    Results []struct {
+	Hits    int
+	Results []struct {
 		Item struct {
 			Id     int
 			Points int

@@ -1,4 +1,4 @@
-package egoist
+package egoistat
 
 type Counter interface {
 	Count(r *Request) int
