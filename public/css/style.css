@@ -476,12 +476,25 @@ h1, h2 {
    margin-bottom: 4em;
 }
 
-#usage .in {
+#usage {
+   margin-top: 3.5em;
+}
+
+#usage .in, #motivation .in {
    text-align: left;
    background: rgba(204,68,85,.3);
    padding: 1px 1em;
    color: rgb(60,0,10);
    text-shadow: 1px 1px 0 rgba(255,255,255,.1);
+}
+
+#usage .in a, #motivation .in a {
+   color: inherit;
+}
+
+#usage .in a:hover, #motivation .in a:hover {
+   text-decoration: none;
+   color: rgb(30,0,10);
 }
 
 #usage code {
