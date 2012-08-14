@@ -90,6 +90,8 @@ Egoistat.StatResultsView = Backbone.View.extend({
             $points.text('...')
         })
 
+        mixpanel.track("Stats fetched", { "URL": this.url })
+            
         stat.fetch({
             success: function(model, _) {
                 networks.each(function(_, n) {
@@ -117,6 +119,7 @@ Egoistat.Router = Backbone.Router.extend({
     },
 
     home: function() {
+        mixpanel.track("Landing page loaded")
         ;(new Egoistat.StatFormView()).render()
     },
 

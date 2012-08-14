@@ -1,7 +1,6 @@
 (function($) {
     var increaseCounter = function(link) {
         $counter = $(link).find('.count')
-        console.log($counter)
         $counter.html(parseInt($counter.html()) + 1)
     }
     
@@ -28,15 +27,20 @@
         facebookUrl += '&t=' + encodeURIComponent(text)
             
         this.attr('href', facebookUrl).click(function(e) {
-            var width = 480
+            e.preventDefault()
+            
+            var self = this
+              , width = 480
               , height = 350
               , left = ($window.width() - width) / 2
               , top = ($window.height() - height) / 2
               , opts = 'status=1' + ',width=' + width  + ',height=' + height + ',top=' + top + ',left=' + left
+              , popup = window.open(this.href, 'facebook', opts)
 
-            increaseCounter(this)
-            window.open(this.href, 'facebook', opts)
-            return false
+            $(popup).unload(function() {
+                mixpanel.track("Page shared", { "Network": "Facebook" })
+                increaseCounter(self)
+            })
         })
     }
     
@@ -53,15 +57,20 @@
         plusoneUrl += '&url=' + encodeURIComponent(url)
 
         this.attr('href', plusoneUrl).click(function(e) {
-            var width = 460
+            e.preventDefault()
+            
+            var self = this
+              , width = 460
               , height = 450
               , left = ($window.width() - width) / 2
               , top = ($window.height() - height) / 2
               , opts = 'scrollbars=Yes,status=1' + ',width=' + width  + ',height=' + height + ',top=' + top + ',left=' + left
+              , popup = window.open(this.href, 'plusone', opts)
 
-            increaseCounter(this)
-            window.open(this.href, 'plusone', opts)
-            return false
+            $(popup).unload(function() {
+                mixpanel.track("Page shared", { "Network": "Google+" })
+                increaseCounter(self)
+            })
         })
     }
 
@@ -80,15 +89,20 @@
         if (!!via) tweetUrl += '&via=' + via
         
         this.attr('href', tweetUrl).click(function(e) {
-            var width = 575
+            e.preventDefault()
+            
+            var self = this
+              , width = 575
               , height = 300
               , left = ($window.width() - width) / 2
               , top = ($window.height() - height) / 2
               , opts = 'status=1' + ',width=' + width  + ',height=' + height + ',top=' + top + ',left=' + left
+              , popup = window.open(this.href, 'twitter', opts)
 
-            increaseCounter(this)
-            window.open(this.href, 'twitter', opts)
-            return false
+            $(popup).unload(function() {
+                mixpanel.track("Page shared", { "Network": "Twitter" })
+                increaseCounter(self)
+            })
         })
     }
 })(jQuery)
