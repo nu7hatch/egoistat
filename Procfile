@@ -1,0 +1,1 @@
+web: ./egoistat -addr ":$PORT"
