@@ -1,5 +1,7 @@
 package egoistat
 
+import "time"
+
 type Request struct {
 	options map[string]string
 }
@@ -32,22 +34,40 @@ func (r *Request) Count(networks ...string) (res map[string]int) {
 		return
 	}
 
-	counts := make(chan *result)
-	defer close(counts)
+	var results = make(chan *result)
+	var quit = make(chan bool)
+	var numJobs = 0
+	var done = false
+	var timeout = time.After(10 * time.Second)
+	
+	defer func() {
+		close(results)
+		close(quit)
+	}()
 
-	numJobs := 0
 	for _, net := range networks {
 		if counter, ok := counters[net]; ok {
 			numJobs++
-			go func(net string) {
-				counts <- &result{net, counter.Count(r)}
-			}(net)
+			go func(net string, quit <-chan bool) {
+				select {
+				case results <- &result{net, counter.Count(r)}:
+				case <-quit:
+				}
+			}(net, quit)
 		}
 	}
 
 	for i := 0; i < numJobs; i++ {
-		partial := <-counts
-		res[partial.network] = partial.count
+		if done {
+			quit <- true
+			continue
+		}
+		select {
+		case partial := <-results:
+			res[partial.network] = partial.count
+		case <-timeout:
+			done = true
+		}
 	}
 
 	return

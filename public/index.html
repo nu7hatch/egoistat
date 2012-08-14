@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Egoistat</title>
+    <title>Egoistat - Social popularity statistics for your website!</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
     <meta name="description" content="">
     <meta name="author" content="Krzysztof Kowalik aka. nu7hatch">
@@ -21,7 +21,7 @@
         </div>
       </header>
 
-      <section role="main">
+      <section role="main" style="display: none">
         <div class="vessel">
           <div id="yield"></div>
 
@@ -33,7 +33,7 @@
               be queried in two ways. You can perform standard HTTP query to
               get social networks' points in JSON format:
             </p>
-<pre><code>$ curl -H "Accept: application/json' http://egoistat.com/api/v1/count.json?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong></code></pre>
+<pre><code>$ curl -H 'Accept: application/json' http://egoistat.com/api/v1/count.json?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong></code></pre>
             <p>
               <strong><code>PAGE_URL</code></strong> must be full URL with
               scheme specified, eg. <code>http://egoistat.net</code>.
@@ -61,9 +61,18 @@
             </p>
           </div>
           </div>
-        </div>
-        <div id="share">
-          <h2><i class="icon-bullhorn"></i> Share</h2>
+
+          <div id="share">
+            <h2><i class="icon-bullhorn"></i> Spread the word!</h2>
+            <div class="in">
+              <ul>
+                <li><span><a href="" class="socialBtn" rel="twitter" title="Tweet this page!"><var><i class="icon icon-twitter"></i> <span class="count">...</span></var> <span class="label">Tweet this page</span></a></span></li>
+                <li><span><a href="" class="socialBtn" rel="facebook" title="Share on Facebook!"><var><i class="icon icon-facebook"></i> <span class="count">...</span></var> <span class="label">Share on facebook</span></a></span></li>
+                <li><span><a href="" class="socialBtn" rel="plusone" title="Google +1"><var><i class="icon icon-google-plus"></i> <span class="count">...</span></var> <span class="label">Share on Google+</span></a></span></li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+          </div>
         </div>
       </section>
       
@@ -118,6 +127,11 @@
     <script src="/js/libs/jquery.base64.min.js"></script>
     <script src="/js/libs/underscore.min.js"></script>
     <script src="/js/libs/backbone.min.js"></script>
+    <script src="/js/social.js"></script>
     <script src="/js/app.js"></script>
+
+    <script src="https://apis.google.com/js/plusone.js"></script>
+    <script src="http://platform.twitter.com/widgets.js"></script>
+    <script src="http://egoistat.com/api/v1/count.js?url=http://egoistat.com/&n=twitter,facebook,plusone&cb=Egoistat.fn.fillSocialCounters"></script>
   </body>
 </html>

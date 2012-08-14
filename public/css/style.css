@@ -501,6 +501,58 @@ h1, h2 {
    margin-top: 3.5em;
 }
 
+#share .in {
+   background: transparent;
+   color: #DD3344;
+   text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+}
+
+#share ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+}
+
+#share ul li {
+   display: block;
+   float: left;
+   width: 33.3%;
+   padding: 0;
+   margin: 0;
+}
+
+#share ul li > span {
+   display: block;
+   padding: 0 5px 0 0;
+}
+#share ul li:last-child > span {
+   padding-right: 0;
+}
+
+#share ul li a {
+   color: #FF7788;
+   display: block;
+   text-decoration: none;
+   text-align: center;
+   padding: .5em 0;
+   background: rgba(60,0,10,.7);
+}
+
+#share ul li a var {
+   display: block;
+   font-style: normal;
+   font-size: 1.2em;
+}
+
+#share ul li a var .count {
+   font-size: .7em;
+}
+
+#share ul li a .label {
+   display: block;
+   font-size: .8em;
+}
+
 h2 {
    text-align: center;
    font-size: 3.5em;

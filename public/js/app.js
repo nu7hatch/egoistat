@@ -1,4 +1,4 @@
-var Egoistat = {}
+var Egoistat = { fn: {} }
 var app
 
 Egoistat.networks = ['twitter', 'facebook', 'plusone', 'reddit', 'hackernews'],
@@ -130,9 +130,31 @@ Egoistat.Router = Backbone.Router.extend({
         ;(new Egoistat.StatFormView(url)).render()
         ;(new Egoistat.StatResultsView(url)).render()
     },
+
+    showPage: function() {
+        $('[role="main"]').show()
+    },
 })
 
-$(function() {
+Egoistat.fn.fillSocialCounters = function() {
+    $('a.socialBtn').fillSocialCounter()
+}
+
+;(function() {
+    $('a[rel="facebook"]').facebookButton({
+        text: "Social popularity statistics for your website:",
+        url: "http://egoistat.com/",
+    })
+    $('a[rel="twitter"]').twitterButton({
+        text: "Social popularity statistics for your website:",
+        url: "http://egoistat.com/",
+        via: "nu7hatch"
+    })
+    $('a[rel="plusone"]').plusoneButton({
+        url: "http://egoistat.com/"
+    })
+
     app = Egoistat.router = new Egoistat.Router()
     Backbone.history.start({ pushState: true })
-})
+    app.showPage()
+}())
