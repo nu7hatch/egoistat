@@ -1,3 +1,8 @@
+@font-face {
+   font-family: SocialIcons;
+   src: url('/font/social-icons.otf');
+}
+
 /*
  * HTML5 Boilerplate
  *
@@ -438,7 +443,226 @@ td {
    Author:
    ========================================================================== */
 
+body {
+   font-size: 18px;
+   font-weight: 300;
+   font-family: "Signika Negative", Helvetica, sans-serif;
+   color: #FFF;
+   background: #AA2233 url('/img/light_honeycomb.png') repeat;
+   padding-bottom: 8em;
+}
 
+.vessel {
+   margin: 0 auto;
+   text-align: center;
+   padding: 0 1em;
+}
+
+header {
+   margin-bottom: 3em;
+}
+
+h1, h2 {
+   font-family: "Oleo Script", sans;
+   font-size: 5em;
+   font-weight: 400;
+   letter-spacing: -5px;
+   margin-bottom: 0;
+   color: rgb(60,0,10);
+   text-shadow: 4px 4px 0 rgba(60,0,10,.3);
+}
+
+#yield {
+   margin-bottom: 4em;
+}
+
+#usage .in {
+   text-align: left;
+   background: rgba(204,68,85,.3);
+   padding: 1px 1em;
+   color: rgb(60,0,10);
+   text-shadow: 1px 1px 0 rgba(255,255,255,.1);
+}
+
+#usage code {
+   font-family: "Ubuntu Mono", "Bitstream Vera Sans Mono", Monospace, "Courier New";
+   font-size: .95em;
+}
+
+#usage pre {
+   font-size: .95em;
+   color: #FFCCBB;
+   text-shadow: none;
+   padding: .5em 1em;
+   background: rgba(60,0,10,.7);
+}
+
+#share {
+   margin-top: 3.5em;
+}
+
+h2 {
+   text-align: center;
+   font-size: 3.5em;
+   margin: 0;
+   margin-bottom: .3em;
+}
+h2 i {
+   font-size: .6em;
+   padding-right: .2em;
+   margin-left: -.7em;
+}
+
+.slogo {
+   font-family: "Oleo Script", sans;
+   text-shadow: 2px 2px 0 rgba(60,0,10,.3);
+}
+
+p.tagline {
+   margin: 0;
+   font-size: 1.1em;
+   font-family: "Oleo Script", sans;
+   color: rgba(60,0,10,.7);
+}
+
+.results table {
+   padding: 0;
+   margin: 0;
+   width: 100%;
+   margin-top: 1em;
+}
+
+.results td {
+   display: table-cell;
+   font-size: 1.1em;
+   padding: 0 2px;
+   font-weight: 400;
+   color: rgb(60,0,10);
+   width: 20%;
+}
+
+.results td .in {
+   height: 70px;
+   line-height: 70px;
+   background: rgba(204,68,85,.3);
+   display: block;
+}
+
+.results td .in i {
+   font-size: 1.5em;
+}
+
+.results td .in var {
+   font-style: normal;
+}
+
+.icon-reddit:before {
+   font-family: SocialIcons !important;
+   content: "R";
+   font-size: 1.2em;
+}
+.icon-hackernews:before {
+   font-family: Helvetica, sans-serif !important;
+   content: "Y";
+   font-weight: bold;
+   font-size: .9em;
+}
+
+.stat-url-wrapper {
+   border: 2px solid rgba(204,68,85,.9);
+   background: rgba(60,0,10,.7);
+   box-shadow: inset 2px 2px 5px rgba(0,0,0,.6), 0 0 5px rgba(204,68,85,1);
+   padding: 0 10px;
+   padding-right: 150px;
+}
+
+input[type="text"] {
+   width: 100%;
+   border: 0;
+   font-size: 1.5em;
+   color: #CC4455;
+   font-weight: 300;
+   background: transparent;
+   line-height: 50px;
+   height: 50px;
+   outline: none;
+}
+
+#stat_form {
+   position: relative;
+}
+
+button#stat_submit {
+   position: absolute;
+   top: 3px;
+   right: 3px;
+   height: 50px;
+   border: 0;
+   width: 150px;
+   padding: 0;
+   font-size: 1.4em;
+   font-family: "Oleo Script";
+   color: rgba(60,0,10,.9);
+   background: #DD3344;
+   box-shadow: inset -3px -3px 1px rgba(0,0,0,.1);
+   text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+}
+
+button#stat_submit:hover {
+   background: #EE3344;
+}
+
+button#stat_submit:active {
+   box-shadow: inset 3px 3px 1px rgba(0,0,0,.1);
+   padding-left: 3px;
+   padding-top: 3px;
+   background: #CC2233;
+}
+
+button#stat_submit i {
+   font-size: .75em;
+}
+
+[role='contentinfo'] {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   padding: .5em 0 .2em 0;
+   font-size: .8em;
+   background: rgba(60,0,10,.7);
+   color: #DD3344;
+   text-align: left;
+}
+
+[role='contentinfo'] .vessel {
+   text-align: left;
+   width: 100%;
+}
+
+[role='contentinfo'] .vessel .in {
+   padding: 0 .5em;
+}
+
+[role='contentinfo'] a {
+   color: #FF7788;
+   text-decoration: none;
+}
+
+[role='contentinfo'] a:hover {
+   color: #FFF;
+   text-decoration: none;
+}
+
+.copyright {
+   width: 50%;
+   float: left;
+}
+
+.forkme {
+   float: right;
+   width: 50%;
+   text-align: right;
+}
 
 
 /* ==========================================================================
@@ -448,7 +672,11 @@ td {
    ========================================================================== */
 
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 660px) {
+   .vessel {
+      width: 640px;
+      padding: 0;
+   }
 }
 
 
@@ -533,7 +761,6 @@ td {
 .clearfix {
     *zoom: 1;
 }
-
 
 
 /* ==========================================================================

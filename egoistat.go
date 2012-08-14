@@ -8,9 +8,17 @@ import (
 	"net/url"
 	"strings"
 	"text/template"
+	"flag"
 )
 
-var scriptTpl = "var Exoteric={c:{{.Data}}, count: function(sn){return this.c[sn] || 0;}};\n{{.Callback}};"
+var Addr string
+
+func init() {
+	flag.StringVar(&Addr, "addr", ":8080", "The address to serve on")
+	flag.Parse()
+}
+
+var scriptTpl = "var egoistat={c:{{.Data}}, count: function(sn){return this.c[sn] || 0;}};\n{{.Callback}};"
 
 func transformParams(form url.Values) (res map[string]string) {
 	res = make(map[string]string)
@@ -65,10 +73,15 @@ func countScriptHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, countScriptData{string(data), callback})
 }
 
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./public/index.html")
+}
+
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./public")))
-	http.HandleFunc("/count.json", countHandler)
-	http.HandleFunc("/count.js", countScriptHandler)
+	http.HandleFunc("/stat/", indexHandler)
+	http.HandleFunc("/api/v1/count.json", countHandler)
+	http.HandleFunc("/api/v1/count.js", countScriptHandler)
 
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	log.Fatal(http.ListenAndServe(Addr, nil))
 }

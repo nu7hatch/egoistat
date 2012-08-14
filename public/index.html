@@ -7,38 +7,117 @@
     <meta name="description" content="">
     <meta name="author" content="Krzysztof Kowalik aka. nu7hatch">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="http://fonts.googleapis.com/css?family=Oleo+Script|Lato:100,100italic,400,300italic,400italic,700,700italic,900,900italic|Delicious|Junction|Abril+Fatface|Ubuntu+Mono:400,700|Signika+Negative:400,300,600" rel="stylesheet" type="text/css">
+    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="container">
       <header role="banner">
         <div class="vessel">
           <h1 class="logo">Egoistat</h1>
-          <p class="tagline">Social statistics of your website in one place.</p>
+          <p class="tagline">Social popularity statistics for your website...</p>
         </div>
       </header>
 
       <section role="main">
         <div class="vessel">
-          <form action="/stat" method="get" id="stat_form">
-            <input type="text" name="url" id="stat_url" value="http://" />
-            <button id="stat_submit">Stat me!</button>
-          </form>
+          <div id="yield"></div>
+
+          <div id="usage">
+            <h2><i class="icon-cogs"></i> Usage</h2>
+            <div class="in">
+            <p>
+              <span class="slogo">Egoistat</span> provides public API which can
+              be queried in two ways. You can perform standard HTTP query to
+              get social networks' points in JSON format:
+            </p>
+<pre><code>$ curl -H "Accept: application/json' http://egoistat.com/api/v1/count.json?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong></code></pre>
+            <p>
+              <strong><code>PAGE_URL</code></strong> must be full URL with
+              scheme specified, eg. <code>http://egoistat.net</code>.
+            </p>
+            <p>
+              <strong><code>NETWORKS</code></strong> gets comma separated
+              list of social networks to get points from. Currently available
+              networks are: <code>facebook</code>, <code>twitter</code>,
+              <code>plusone</code>, <code>reddit</code>, <code>hackernews</code>
+              and <code>github</code>.
+            </p>
+            <p>
+              You can also request a script ready to use on your website, so
+              that no backend calls will be required:
+            </p>
+<pre><code>&lt;script src="//egoistat.com/api/v1/count.js?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong>&cb=<strong>CALLBACK</strong>"&gt;&lt;/script&gt;</code></pre>
+            <p>
+              This script defines the <strong><code>egoistat</code></strong> global variable - 
+              it responds to <strong><code>count(sn)</code></strong> function
+              which return points count for specified social network <strong><code>sn</code></strong>.
+            </p>
+            <p>
+              It is also possible to specify <strong><code>CALLBACK</code></strong> which is going to be
+              executed after script gets loaded.
+            </p>
+          </div>
+          </div>
+        </div>
+        <div id="share">
+          <h2><i class="icon-bullhorn"></i> Share</h2>
         </div>
       </section>
       
       <footer role="contentinfo">
         <div class="vessel">
-          <div class="copyright">
-            Copyright &copy; 2012 by Chris Kowalik a.k.a. <a href="http://nu7hat.ch/">nu7hatch</a><br />
-            <small>All rights reserved.</small>
+          <div class="in">
+            <div class="copyright">
+              Copyright &copy; 2012 by <a href="http://nu7hat.ch/">nu7hatch</a>.
+              All rights reserved.
+            </div>
+            <div class="forkme">
+              <a href="http://github.com/nu7hatch/egoistat" title="Fork me on Github"><i class="icon-github"></i></a>
+            </div>
+            <div class="clearfix">
           </div>
         </div>
       </footer>
     </div>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-    <script src="/js/libs/backbone-min.js"></script>
-    <script src="/js/libs/underscore-min.js"></script>
+
+    <script type="text/ejs" id="stat_form_tpl">
+      <div id="stat">
+        <form action="/stat" method="get" id="stat_form">
+          <div class="stat-url-wrapper">
+            <input type="text" name="url" id="stat_url" value="http://">
+          </div>
+          <button id="stat_submit"><i class="icon-search"></i> Stat me</button>
+        </form>
+
+        <div class="clearfix"></div>
+
+        <div class="results">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <% for (var i=0; i < Egoistat.networks.length; i++) { %>
+                  <% n = Egoistat.networks[i] %> 
+                  <td class="network <%= n %>" tag="<%= n %>">
+                    <div class="in">
+                      <i class="icon-<%= n %>"></i> <var class="points">...</var>
+                    </div>
+                  </td>
+                <% } %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </script>
+
+    <script src="/js/libs/jquery.min.js"></script>
+    <script src="/js/libs/jquery.view.ejs.min.js"></script>
+    <script src="/js/libs/jquery.base64.min.js"></script>
+    <script src="/js/libs/underscore.min.js"></script>
+    <script src="/js/libs/backbone.min.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>
