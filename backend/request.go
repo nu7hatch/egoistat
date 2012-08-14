@@ -23,61 +23,44 @@ func (r *Request) Option(key string) (res string) {
 	return
 }
 
-type result struct {
-	network string
-	count   int
-}
-
-func (r *Request) Count(networks ...string) (res map[string]int) {
-	res = make(map[string]int)
+func (r *Request) Stat(networks ...string) (results ResultsGroup) {
 	if len(r.Url()) == 0 {
 		return
 	}
 
-	var results = make(chan *result)
-	var quit = make(chan bool)
-	var numJobs = 0
-	var done = false
-	var timeout = time.After(10 * time.Second)
-	
-	defer func() {
-		close(results)
-		close(quit)
-	}()
+	results = ResultsGroup{}
 
-	for _, net := range networks {
-		if counter, ok := counters[net]; ok {
-			numJobs++
-			go func(net string, quit <-chan bool) {
-				select {
-				case results <- &result{net, counter.Count(r)}:
-				case <-quit:
-				}
-			}(net, quit)
+	var fanin = make(chan *Result)
+	var timeout = time.After(10 * time.Second)
+	var jobs = 0
+
+	for _, network := range networks {
+		if counter, ok := FindCounter(network); ok {
+			jobs++
+			go func(network string) {
+				partial := counter(r).In(network)
+				fanin <- partial
+			}(network)
 		}
 	}
 
-	for i := 0; i < numJobs; i++ {
-		if done {
-			quit <- true
-			continue
-		}
+	for ; jobs > 0; jobs-- {
 		select {
-		case partial := <-results:
-			res[partial.network] = partial.count
+		case partial := <-fanin:
+			results.Add(partial)
 		case <-timeout:
-			done = true
+			return
 		}
 	}
 
 	return
 }
 
-func (r *Request) CountAll() map[string]int {
+func (r *Request) StatAll() ResultsGroup {
 	networks := []string{}
 	for net, _ := range counters {
 		networks = append(networks, net)
 	}
 
-	return r.Count(networks...)
+	return r.Stat(networks...)
 }

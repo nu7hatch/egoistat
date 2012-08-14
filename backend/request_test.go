@@ -2,14 +2,12 @@ package egoistat
 
 import "testing"
 
-type TestCounter struct{}
-
-func (c *TestCounter) Count(r *Request) int {
-	return 10
+func testCounter(r *Request) *Result {
+	return &Result{Points: 10}
 }
 
 func init() {
-	counters["test"] = new(TestCounter)
+	RegisterCounter("test", testCounter)
 }
 
 func TestNewRequestWithoutOptions(t *testing.T) {
@@ -28,7 +26,7 @@ func TestNewRequestWithOptions(t *testing.T) {
 
 func TestRequestCount(t *testing.T) {
 	r := NewRequest("http://nu7hat.ch/", nil)
-	if count := r.Count("test"); count["test"] != 10 {
-		t.Errorf("Expected to get proper count, got %v", count)
+	if result := r.Stat("test").Find("test"); result.Points != 10 {
+		t.Errorf("Expected to get proper count, got %v", result.Points)
 	}
 }

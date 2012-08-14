@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+const googlePlusFeedUrl = "https://clients6.google.com/rpc?key=AIzaSyCKSbrvQasunBoV16zDH9R33D88CeLr9gQ"
+
 type googlePlusFeed struct {
 	Result struct {
 		Metadata struct {
@@ -16,7 +18,7 @@ type googlePlusFeed struct {
 	}
 }
 
-type googlePlusRequest struct {
+type googlePlusRequestData struct {
 	Method     string                   `json:"method"`
 	Id         string                   `json:"id"`
 	Key        string                   `json:"key"`
@@ -33,15 +35,9 @@ type googlePlusRequestParams struct {
 	GroupId string `json:"groupId"`
 }
 
-type GooglePlusCounter struct{}
-
-func (c *GooglePlusCounter) url() string {
-	return "https://clients6.google.com/rpc?key=AIzaSyCKSbrvQasunBoV16zDH9R33D88CeLr9gQ"
-}
-
-func (c *GooglePlusCounter) postDataFor(url string) string {
-	b, err := json.Marshal([]*googlePlusRequest{
-		&googlePlusRequest{
+func newGooglePlusRequestData(url string) string {
+	b, err := json.Marshal([]*googlePlusRequestData{
+		&googlePlusRequestData{
 			"pos.plusones.get", "p", "p", "2.0", "v1",
 			&googlePlusRequestParams{true, url, "widget", "@viewer", "@self"},
 		},
@@ -52,28 +48,28 @@ func (c *GooglePlusCounter) postDataFor(url string) string {
 	return string(b)
 }
 
-func (c *GooglePlusCounter) Count(r *Request) int {
+func CountGooglePlusShares(r *Request) *Result {
 	var resp *http.Response
 	var dec *json.Decoder
 	var err error
-	var data []googlePlusFeed
-	var postData = strings.NewReader(c.postDataFor(r.Url()))
+	var feed []googlePlusFeed
+	var postData = strings.NewReader(newGooglePlusRequestData(r.Url()))
 
-	if resp, err = http.Post(c.url(), "application/json", postData); err != nil {
-		return 0
+	if resp, err = http.Post(googlePlusFeedUrl, "application/json", postData); err != nil {
+		return Empty
 	}
 
 	dec = json.NewDecoder(resp.Body)
-	if err = dec.Decode(&data); err != nil {
-		return 0
+	if err = dec.Decode(&feed); err != nil {
+		return Empty
 	}
-	if len(data) == 0 {
-		return 0
+	if len(feed) == 0 {
+		return Empty
 	}
 
-	return int(data[0].Result.Metadata.GlobalCounts.Count)
+	return &Result{Points: int(feed[0].Result.Metadata.GlobalCounts.Count)}
 }
 
 func init() {
-	counters["plusone"] = new(GooglePlusCounter)
+	RegisterCounter("plusone", CountGooglePlusShares)
 }

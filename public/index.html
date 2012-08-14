@@ -33,7 +33,7 @@
               be queried in two ways. You can perform standard HTTP query to
               get social networks' points in JSON format:
             </p>
-<pre><code>$ curl -H 'Accept: application/json' http://egoistat.com/api/v1/count.json?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong></code></pre>
+<pre><code>$ curl -H 'Accept: application/json' http://egoistat.com/api/v1/stat.json?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong></code></pre>
             <p>
               <strong><code>PAGE_URL</code></strong> must be full URL with
               scheme specified, eg. <code>http://egoistat.net</code>.
@@ -49,10 +49,10 @@
               You can also request a script ready to use on your website, so
               that no backend calls will be required:
             </p>
-<pre><code>&lt;script src="//egoistat.com/api/v1/count.js?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong>&cb=<strong>CALLBACK</strong>"&gt;&lt;/script&gt;</code></pre>
+<pre><code>&lt;script src="//egoistat.com/api/v1/stat.js?url=<strong>PAGE_URL</strong>&n=<strong>NETWORKS</strong>&cb=<strong>CALLBACK</strong>"&gt;&lt;/script&gt;</code></pre>
             <p>
               This script defines the <strong><code>egoistat</code></strong> global variable - 
-              it responds to <strong><code>count(sn)</code></strong> function
+              it responds to <strong><code>points(sn)</code></strong> function
               which return points count for specified social network <strong><code>sn</code></strong>.
             </p>
             <p>
@@ -132,6 +132,6 @@
 
     <script src="https://apis.google.com/js/plusone.js"></script>
     <script src="http://platform.twitter.com/widgets.js"></script>
-    <script src="http://egoistat.com/api/v1/count.js?url=http://egoistat.com/&n=twitter,facebook,plusone&cb=Egoistat.fn.fillSocialCounters"></script>
+    <script src="/api/v1/stat.js?url=http://egoistat.com/&n=twitter,facebook,plusone&cb=Egoistat.fn.fillSocialCounters"></script>
   </body>
 </html>

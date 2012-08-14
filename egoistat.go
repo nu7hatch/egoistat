@@ -18,7 +18,7 @@ func init() {
 	flag.Parse()
 }
 
-var scriptTpl = "var egoistat={c:{{.Data}}, count: function(sn){return this.c[sn] || 0;}};\n{{.Callback}};"
+var scriptTpl = "var egoistat={c:{{.Data}}, points: function(sn){return this.c[sn] || 0;}};\n{{.Callback}};"
 
 func transformParams(form url.Values) (res map[string]string) {
 	res = make(map[string]string)
@@ -28,7 +28,7 @@ func transformParams(form url.Values) (res map[string]string) {
 	return
 }
 
-func countHandler(w http.ResponseWriter, r *http.Request) {
+func statHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	var networks = strings.Split(r.FormValue("n"), ",")
@@ -39,10 +39,10 @@ func countHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 
 	request := egoistat.NewRequest(url, params)
-	counts := request.Count(networks...)
+	results := request.Stat(networks...)
 
 	enc := json.NewEncoder(w)
-	enc.Encode(counts)
+	enc.Encode(results)
 }
 
 type countScriptData struct {
@@ -50,7 +50,7 @@ type countScriptData struct {
 	Callback string
 }
 
-func countScriptHandler(w http.ResponseWriter, r *http.Request) {
+func statScriptHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	var networks = strings.Split(r.FormValue("n"), ",")
@@ -66,8 +66,8 @@ func countScriptHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 
 	request := egoistat.NewRequest(url, params)
-	counts := request.Count(networks...)
-	data, _ := json.Marshal(counts)
+	results := request.Stat(networks...)
+	data, _ := json.Marshal(results)
 
 	tmpl, _ := template.New("script").Parse(scriptTpl)
 	tmpl.Execute(w, countScriptData{string(data), callback})
@@ -80,8 +80,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./public")))
 	http.HandleFunc("/stat/", indexHandler)
-	http.HandleFunc("/api/v1/count.json", countHandler)
-	http.HandleFunc("/api/v1/count.js", countScriptHandler)
+	http.HandleFunc("/api/v1/stat.json", statHandler)
+	http.HandleFunc("/api/v1/stat.js", statScriptHandler)
 
 	log.Fatal(http.ListenAndServe(Addr, nil))
 }

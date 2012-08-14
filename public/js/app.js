@@ -5,7 +5,7 @@ Egoistat.networks = ['twitter', 'facebook', 'plusone', 'reddit', 'hackernews'],
 
 Egoistat.Stat = Backbone.Model.extend({
     url: function() {
-        return "/api/v1/count.json" + "?url=" + escape(this.address) + "&n=" + this.networks.join(",")
+        return "/api/v1/stat.json" + "?url=" + escape(this.address) + "&n=" + this.networks.join(",")
     },
     
     initialize: function(address, networks) {

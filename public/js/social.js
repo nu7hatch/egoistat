@@ -11,7 +11,7 @@
               , $counter = $link.find('.count')
               , rel = $link.attr('rel')
             
-            $counter.html(egoistat.count(rel))
+            $counter.html(egoistat.points(rel))
         })
     }
     

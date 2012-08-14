@@ -537,6 +537,9 @@ h1, h2 {
    padding: .5em 0;
    background: rgba(60,0,10,.7);
 }
+#share ul li a:hover {
+   color: #FFCCBB;
+}
 
 #share ul li a var {
    display: block;

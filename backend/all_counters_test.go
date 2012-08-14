@@ -28,7 +28,7 @@ var counterTests = map[string](func(string) *Request){
 func TestRequestCountForCounters(t *testing.T) {
 	for net, test := range counterTests {
 		r := test("http://github.com/")
-		if count, _ := r.Count(net)[net]; count == 0 {
+		if result := r.Stat(net).Find("net"); result != nil && result.Points == 0 {
 			t.Errorf("Expected to get count from %s, got nothing", net)
 		}
 	}
