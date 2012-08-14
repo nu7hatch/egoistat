@@ -49,12 +49,14 @@ func newGooglePlusRequestData(url string) string {
 }
 
 func CountGooglePlusShares(r *Request) *Result {
-	var resp *http.Response
-	var dec *json.Decoder
-	var err error
-	var feed []googlePlusFeed
-	var postData = strings.NewReader(newGooglePlusRequestData(r.Url()))
-
+	var (
+		resp *http.Response
+		dec *json.Decoder
+		err error
+		feed []googlePlusFeed
+		postData = strings.NewReader(newGooglePlusRequestData(r.Url()))
+	)
+	
 	if resp, err = http.Post(googlePlusFeedUrl, "application/json", postData); err != nil {
 		return Empty
 	}

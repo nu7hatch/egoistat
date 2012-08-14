@@ -30,9 +30,11 @@ func (r *Request) Stat(networks ...string) (results ResultsGroup) {
 
 	results = ResultsGroup{}
 
-	var fanin = make(chan *Result)
-	var timeout = time.After(10 * time.Second)
-	var jobs = 0
+	var (
+		fanin = make(chan *Result)
+		timeout = time.After(10 * time.Second)
+		jobs = 0
+	)
 
 	for _, network := range networks {
 		if counter, ok := FindCounter(network); ok {

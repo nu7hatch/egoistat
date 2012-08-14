@@ -13,13 +13,15 @@ type facebookFeed struct {
 }
 
 func CountFacebookShares(r *Request) *Result {
-	var resp *http.Response
-	var dec *json.Decoder
-	var err error
-	var feed map[string]facebookFeed
-	var url = r.Url()
-	var feedUrl = fmt.Sprintf(facebookFeedUrl, url)
-
+	var (
+		resp *http.Response
+		dec *json.Decoder
+		err error
+		feed map[string]facebookFeed
+		url = r.Url()
+		feedUrl = fmt.Sprintf(facebookFeedUrl, url)
+	)
+	
 	if resp, err = http.Get(feedUrl); err != nil {
 		return Empty
 	}
