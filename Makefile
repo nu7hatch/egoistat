@@ -19,17 +19,17 @@ ifeq ($(DEV), 1)
 	DEV_OPTS=-m none
 endif
 
-all: images assets
+all: assets
 
-assets: js css
+assets: scripts styles
 
 images: png
 
-css:
+styles:
 	$(MERGE) $(CSS_EXTRA_FILES) $(ASSETS)/css/style.css \
 	-o $(PUBLIC)/css/style.css -e data_uri $(CSS_OPTS) $(DEV_OPTS)
 
-js:
+scripts:
 	$(MERGE) $(JS_EXTRA_FILES) $(ASSETS)/js/app.js \
 	-o $(PUBLIC)/js/app.js $(JS_OPTS) $(DEV_OPTS)
 

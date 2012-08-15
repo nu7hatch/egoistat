@@ -11,12 +11,12 @@ end
 group :assets do
   guard :shell do
     watch %r{^assets/js/.+\.js$} do |m|
-      system 'make js DEV=1'
+      system 'make scripts DEV=1'
       n "Scripts recompiled (changed file: #{m[0]})"
     end
 
     watch %r{^assets/css/.+\.css} do |m|
-      system 'make css DEV=1'
+      system 'make styles DEV=1'
       n "Styles recompiled (changed file: #{m[0]})"
     end
   end
