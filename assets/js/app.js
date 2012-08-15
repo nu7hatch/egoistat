@@ -28,7 +28,7 @@ Egoistat.networks = [
 
 Egoistat.Stat = Backbone.Model.extend({
     url: function() {
-        return "/api/v1/stat.json" + "?url=" + escape(this.address) + "&n=" + this.networks.join(",")
+        return "/api/v1/stat.json" + "?url=" + encodeURIComponent(this.address) + "&n=" + this.networks.join(",")
     },
     
     initialize: function(address, networks) {
