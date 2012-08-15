@@ -40,7 +40,7 @@ guard:
 	$(GUARD) start -i
 
 deploy: all
-	git add public/ && git commit -m "updated assets"
+	-git add public/ && git commit -m "updated assets"
 	git push heroku master
 
 gems: install-guard install-juicer
