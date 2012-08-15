@@ -668,8 +668,10 @@ input[type="text"] {
    color: #CC4455;
    font-weight: 300;
    background: transparent;
-   /*line-height: 50px;*/
-   height: 50px;
+   line-height: 52px;
+   height: 52px;
+   padding: 0;
+   margin: 0;
    outline: none;
 }
 
