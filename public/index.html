@@ -3,14 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>Egoistat - Social popularity statistics for your website!</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
     <meta name="description" content="">
     <meta name="author" content="Krzysztof Kowalik aka. nu7hatch">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="http://fonts.googleapis.com/css?family=Oleo+Script|Lato:100,100italic,400,300italic,400italic,700,700italic,900,900italic|Delicious|Junction|Abril+Fatface|Ubuntu+Mono:400,700|Signika+Negative:400,300,600" rel="stylesheet" type="text/css">
-    <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css?#1" rel="stylesheet" type="text/css" media="screen">
 
     <!-- start Mixpanel --><script type="text/javascript">(function(c,a){window.mixpanel=a;var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.0.min.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?
     g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1})(document,window.mixpanel||[]);
@@ -153,14 +151,7 @@
       </div>
     </script>
 
-    <script src="/js/libs/jquery.min.js"></script>
-    <script src="/js/libs/jquery.view.ejs.min.js"></script>
-    <script src="/js/libs/jquery.base64.min.js"></script>
-    <script src="/js/libs/underscore.min.js"></script>
-    <script src="/js/libs/backbone.min.js"></script>
-    <script src="/js/social.js"></script>
-    <script src="/js/app.js"></script>
-
+    <script src="/js/app.js?#1"></script>
     <script src="https://apis.google.com/js/plusone.js"></script>
     <script src="http://platform.twitter.com/widgets.js"></script>
     <script src="/api/v1/stat.js?url=http://egoistat.com/&n=twitter,facebook,plusone&cb=Egoistat.fn.fillSocialCounters"></script>
