@@ -29,7 +29,7 @@ func (r *Request) Stat(networks ...string) (results ResultsGroup) {
 	}
 
 	var (
-		fanin = make(chan *Result)
+		fanin = make(chan *Result, len(networks))
 		timeout = time.After(10 * time.Second)
 		jobs = 0
 	)
@@ -49,11 +49,6 @@ func (r *Request) Stat(networks ...string) (results ResultsGroup) {
 		case partial := <-fanin:
 			results.Add(partial)
 		case <-timeout:
-			go func() { 
-				for ; jobs > 0; jobs-- {
-					<-fanin
-				}
-			}()
 			return
 		}
 	}
