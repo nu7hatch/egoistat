@@ -23,6 +23,9 @@ var counterTests = map[string](func(string) *Request){
 	"reddit": func(url string) *Request {
 		return NewRequest(url, nil)
 	},
+  "pinterest": func(url string) *Request {
+    return NewRequest(url, nil)
+  },
 }
 
 func TestRequestCountForCounters(t *testing.T) {
