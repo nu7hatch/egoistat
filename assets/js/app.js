@@ -23,7 +23,8 @@ Egoistat.networks = [
     'facebook',
     'plusone',
     'reddit',
-    'hackernews'
+    'hackernews',
+    'pinterest'
 ]
 
 Egoistat.Stat = Backbone.Model.extend({
