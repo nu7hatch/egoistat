@@ -17,10 +17,10 @@ help:
 server:
 	$(SERVER)
 
-jammit:
+precompile_assets:
 	DEV=$(DEV) $(JAMMIT) -f -o $(PUBLIC_DIR)/assets
 
-guard:
+watch_assets:
 	$(GUARD) start -i
 
 deploy: all

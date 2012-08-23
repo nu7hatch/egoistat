@@ -83,17 +83,17 @@ installed automatically if you don't have it yet):
 
 Now you're able to use assets compression and bundling:
 
-    $ make jammit
+    $ make precompile_assets
 
 Specifying `DEV` switch you can turn minifying on and off. For example
 the following command will only merge scripts, without minifying.
 
-    $ make jammit DEV=1
+    $ make precompile_assets DEV=1
 
 To speed up development use `guard`. This command will run watcher
 on `assets/` directory: 
 
-    $ make guard
+    $ make watch_assets
 
 Every time source file changes it will rebuild assets and reload 
 your browser (if it has [LiveReload](http://livereload.com/) addon
