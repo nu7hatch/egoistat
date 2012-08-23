@@ -6,6 +6,8 @@ rescue LoadError
   $stderr.write("ERROR: Bundler not installed, run `gem install bundler` to get it.\n")
 end
 
+require 'colorize'
+
 GO                  = ENV['GO'] || "go"
 GIT                 = ENV['GIT'] ||"git"
 JAMMIT              = ENV['JAMMIT'] || "jammit"
@@ -51,26 +53,26 @@ end
 
 desc "Builds backend, compiles static assets and deploys the app."
 task :deploy => "deploy:require_clean_tree" do
-  puts "# Merging changes to master..."
+  puts "# Merging changes to master...".cyan
   Rake::Task["deploy:merge_master"].invoke
 
-  puts "# Building project and precompiling assets..."
+  puts "\n# Building project and precompiling assets...".cyan
   Rake::Task["default"].invoke
 
-  puts "# Committing changes..."
+  puts "\n# Committing changes...".cyan
   Rake::Task["deploy:commit_release"].invoke
 
-  puts "# Release v#{$VERSION} ready, deploying..."
+  puts "\n# Release v#{$VERSION} ready, deploying...".cyan
   Rake::Task["deploy:push"].invoke
   
-  puts "# Cleaning up"
+  puts "\n# Cleaning up".cyan
   Rake::Task["deploy:cleanup"].invoke
 end
 
 namespace :deploy do
   task :require_clean_tree do
     system "#{GIT} diff --quiet HEAD"
-    raise "Uncommited changes detected, commit or stash them before deploy!" if $? != 0
+    raise "Uncommited changes detected, commit or stash them before deploy!".red if $? != 0
   end
   
   task :merge_master do

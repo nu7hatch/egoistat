@@ -6,6 +6,7 @@ GEM
       open4
     Platform (0.4.0)
     addressable (2.3.2)
+    colorize (0.5.8)
     em-websocket (0.3.8)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
@@ -44,6 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  colorize
   foreman
   guard
   guard-livereload

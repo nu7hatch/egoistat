@@ -8,4 +8,5 @@ group :development do
   gem 'guard'
   gem 'guard-shell'
   gem 'guard-livereload'
+  gem 'colorize'
 end
