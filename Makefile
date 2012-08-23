@@ -1,6 +1,6 @@
 GO=go
 GIT=git
-ECHO=echo
+ECHO=echo -e
 JAMMIT=jammit
 BUNDLE=bundle
 GEM_INSTALL=gem install --no-ri --no-rdoc
@@ -10,6 +10,7 @@ COMPILED_ASSETS_DIR=$(PUBLIC_DIR)/assets
 SERVER=foreman start
 PRODUCTION_BRANCH=production
 VERSION=$(shell cat VERSION)
+UNAME=$(shell uname)
 DEV_OPTS=
 DEV?=0
 
@@ -51,12 +52,12 @@ deploy_prepare:
 
 deploy: deploy_require_clean_tree deploy_merge_master
 	@$(ECHO) $$(($(VERSION)+1)) > VERSION
-	@$(ECHO) -e "\n# Commiting changes"
+	@$(ECHO) "\n# Commiting changes"
 	$(GIT) add VERSION $(COMPILED_ASSETS_DIR)
-	$(GIT) commit -qm "Build v$(VERSION)"
-	@$(ECHO) -e "\n# Version #$(VERSION) ready, deploying..."
+	$(GIT) commit -qm "Release v$(VERSION)"
+	@$(ECHO) "\n# Release no.$(VERSION) ready, deploying..."
 	$(GIT) push heroku '$(PRODUCTION_BRANCH):master'
-	@$(ECHO) -e "\n# Cleaning up..."
+	@$(ECHO) "\n# Cleaning up..."
 	$(GIT) checkout master
 
 prepare:
