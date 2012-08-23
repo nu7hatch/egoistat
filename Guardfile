@@ -2,17 +2,13 @@
 
 notification :off
 
-group :public do
-  guard :livereload do
-    watch %r{public/.*$}
-  end
+guard :livereload do
+  watch %r{public/.*$}
 end
 
-group :assets do
-  guard :shell do
-    watch %r{^((assets/(.+/)?.+\.(js|jst|css))|(config/assets.yml))$} do |m|
-      system 'rake assets:precompile DEV=1'
-      n "Assets recompiled (changed file: #{m[0]})"
-    end
+guard :shell do
+  watch %r{^((assets/(.+/)?.+\.(js|jst|css))|(config/assets.yml))$} do |m|
+    system 'rake assets:precompile DEV=1'
+    n "Assets recompiled (changed files: #{m.join(', ')})"
   end
 end

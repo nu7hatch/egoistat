@@ -6,7 +6,6 @@ rescue LoadError
   $stderr.write("ERROR: Bundler not installed, run `gem install bundler` to get it.\n")
 end
 
-$LOAD_PATH.unshift("~/Code/Gems/rosey/lib")
 require 'rosey/tasks/all'
 
 $GO = ENV['GO'] || "go"
@@ -15,7 +14,7 @@ $PUBLIC_DIR ||= "public"
 $COMPILED_ASSETS_DIR ||= "#{$PUBLIC_DIR}/assets"
 $PRODUCTION_BRANCH ||= "production"
 
-task :default => [:build, :precompile_assets]
+task :default => ["build", "assets:precompile"]
 
 desc "Starts application server."
 task :server => :install do
