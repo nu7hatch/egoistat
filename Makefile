@@ -1,6 +1,7 @@
 SERVER=foreman start
 JAMMIT=jammit
 BUNDLE=bundle
+GEM_INSTALL=gem install --no-ri --no-rdoc
 GUARD=$(BUNDLE) exec guard
 PUBLIC_DIR?=public
 DEV_OPTS=
@@ -27,4 +28,5 @@ deploy: all
 	git push heroku master
 
 prepare:
+	$(GEM_INSTALL) bundler
 	$(BUNDLE) install
