@@ -1,3 +1,5 @@
+var egoistat = egoistat || { points: function() { return 0; } };
+
 ;(function($) {
     var increaseCounter = function(link) {
         $counter = $(link).find('.count');

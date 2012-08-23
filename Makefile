@@ -1,54 +1,30 @@
-JUICER=juicer
-MERGE=$(JUICER) merge
-GUARD=guard
-ASSETS=./assets
-PUBLIC=./public
-JUICER_OPTS=-f -d $(PUBLIC)
-CSS_OPTS=$(JUICER_OPTS)
-CSS_EXTRA_FILES=
-JS_OPTS=$(JUICER_OPTS) -s
-JS_EXTRA_FILES=
-IMG=$(PUBLIC)/img
-IMG_PNG_OPTS=-o5
+SERVER=foreman start
+JAMMIT=jammit
+BUNDLE=bundle
+GUARD=$(BUNDLE) exec guard
+PUBLIC_DIR?=public
 DEV_OPTS=
 DEV?=0
-GEM_OPTS=--no-ri --no-rdoc
 
-ifeq ($(DEV), 1)
-	DEV=1
-	DEV_OPTS=-m none
-endif
+all: help
 
-all: assets
+help:
+	@echo "Usage: make target [VARS...]"
+	@echo "The targets are: server, assets, guard, deploy, prepare"
+	@echo "Defaults: DEV=0; PUBLIC_DIR=public;"
 
-assets: scripts styles
+server:
+	$(SERVER)
 
-images: png
-
-styles:
-	$(MERGE) $(CSS_EXTRA_FILES) $(ASSETS)/css/style.css \
-	-o $(PUBLIC)/css/style.css -e data_uri $(CSS_OPTS) $(DEV_OPTS)
-
-scripts:
-	$(MERGE) $(JS_EXTRA_FILES) $(ASSETS)/js/app.js \
-	-o $(PUBLIC)/js/app.js $(JS_OPTS) $(DEV_OPTS)
-
-png:
-	find $(IMG) -name '*.png' -exec optipng $(IMG_PNG_OPTS) {} \;
+jammit:
+	DEV=$(DEV) $(JAMMIT) -f -o $(PUBLIC_DIR)/assets
 
 guard:
 	$(GUARD) start -i
 
 deploy: all
-	-git add public/ && git commit -m "updated assets"
+	-git add $(PUBLIC_DIR) && git commit -qm "Recompiled assets"
 	git push heroku master
 
-gems: install-guard install-juicer
-
-install-juicer:
-	gem install juicer $(GEM_OPTS)
-	juicer install yui_compressor
-	juicer install jslint
-
-install-guard:
-	gem install guard guard-shell guard-livereload $(GEM_OPTS)
+prepare:
+	$(BUNDLE) install

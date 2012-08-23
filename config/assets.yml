@@ -1,0 +1,28 @@
+<% if ENV['DEV'] == '1' %>
+compress_assets: off
+embed_assets: off
+gzip_assets: off
+<% else %>
+compress_assets: on
+embed_assets: datauri
+gzip_assets: true
+<% end %>
+
+javascripts:
+  app:
+    - assets/libs/jquery-1.8.0.js
+    - assets/libs/underscore.js
+    - assets/libs/backbone.js
+    - assets/libs/*.js
+    - assets/app/app.js
+    - assets/app/models/*.js
+    - assets/app/views/*.js
+    - assets/app/helpers/*.js
+    - assets/app/templates/**/*.jst
+
+stylesheets:
+  screen:
+    - assets/styles/font-awesome.css
+    - assets/styles/reset.css
+    - assets/styles/screen.css
+    - assets/styles/helpers.css

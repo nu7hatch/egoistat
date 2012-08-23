@@ -1,0 +1,334 @@
+/*
+ * Egoistat screen stylesheets.
+ * Copyright (c) 2012 by Egoistat creators. All rights reserved.
+ */
+
+
+/* ==========================================================================
+   Primary styles.
+   ========================================================================== */
+
+@font-face {
+   font-family: SocialIcons;
+   src: url('/font/social-icons.otf');
+}
+
+body {
+   font-size: 18px;
+   font-weight: 300;
+   font-family: "Signika Negative", Helvetica, sans-serif;
+   color: #FFF;
+   background: #AA2233 url('../img/light_honeycomb.png?embed=true') repeat;
+}
+
+.vessel {
+   margin: 0 auto;
+   text-align: center;
+   padding: 0 1em;
+}
+
+header {
+   margin-bottom: 3em;
+}
+
+h1, h2 {
+   font-family: "Oleo Script", sans;
+   font-size: 5em;
+   font-weight: 400;
+   letter-spacing: -5px;
+   margin-bottom: 0;
+   color: rgb(60,0,10);
+   text-shadow: 4px 4px 0 rgba(60,0,10,.3);
+}
+
+[role='main'] {
+   padding-bottom: 6em;
+}
+
+#yield {
+   margin-bottom: 4em;
+}
+
+#mixpanel {
+   text-align: right;
+   padding-right: 3px;
+   margin-bottom: 2.7em;
+}
+#mixpanel .vessel {
+   text-align: right;
+}
+#mixpanel a img {
+   border: 2px solid rgba(255,255,255,.15);
+}
+
+#usage {
+   margin-top: 3.5em;
+}
+
+#usage .in, #motivation .in {
+   text-align: left;
+   background: rgba(204,68,85,.3);
+   padding: 1px 1em;
+   color: rgb(60,0,10);
+   text-shadow: 1px 1px 0 rgba(255,255,255,.1);
+}
+
+#usage .in a, #motivation .in a {
+   color: inherit;
+}
+
+#usage .in a:hover, #motivation .in a:hover {
+   text-decoration: none;
+   color: rgb(30,0,10);
+}
+
+#usage code {
+   font-family: "Ubuntu Mono", "Bitstream Vera Sans Mono", Monospace, "Courier New";
+   font-size: .95em;
+}
+
+#usage pre {
+   font-size: .95em;
+   color: #FFCCBB;
+   text-shadow: none;
+   padding: .5em 1em;
+   background: rgba(60,0,10,.7);
+}
+
+#share {
+   margin-top: 3.5em;
+}
+
+#share .in {
+   background: transparent;
+   color: #DD3344;
+   text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+}
+
+#share ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+}
+
+#share ul li {
+   display: block;
+   float: left;
+   width: 33.3%;
+   padding: 0;
+   margin: 0;
+}
+
+#share ul li > span {
+   display: block;
+   padding: 0 5px 0 0;
+}
+#share ul li:last-child > span {
+   padding-right: 0;
+}
+
+#share ul li a {
+   color: #FF7788;
+   display: block;
+   text-decoration: none;
+   text-align: center;
+   padding: .5em 0;
+   background: rgba(60,0,10,.7);
+}
+#share ul li a:hover {
+   color: #FFCCBB;
+}
+
+#share ul li a var {
+   display: block;
+   font-style: normal;
+   font-size: 1.2em;
+}
+
+#share ul li a var .count {
+   font-size: .7em;
+}
+
+#share ul li a .label {
+   display: block;
+   font-size: .8em;
+}
+
+h2 {
+   text-align: center;
+   font-size: 3.5em;
+   margin: 0;
+   margin-bottom: .3em;
+}
+h2 i {
+   font-size: .6em;
+   padding-right: .2em;
+   margin-left: -.7em;
+}
+
+.slogo {
+   font-family: "Oleo Script", sans;
+   text-shadow: 2px 2px 0 rgba(60,0,10,.3);
+}
+
+p.tagline {
+   margin: 0;
+   font-size: 1.1em;
+   font-family: "Oleo Script", sans;
+   color: rgba(60,0,10,.7);
+}
+
+.results table {
+   padding: 0;
+   margin: 0;
+   width: 100%;
+   margin-top: 1em;
+}
+
+.results td {
+   display: table-cell;
+   font-size: 1.1em;
+   padding: 0 2px;
+   font-weight: 400;
+   color: rgb(60,0,10);
+   width: 20%;
+}
+
+.results td .in {
+   height: 70px;
+   line-height: 70px;
+   background: rgba(204,68,85,.3);
+   display: block;
+}
+
+.results td .in i {
+   font-size: 1.5em;
+}
+
+.results td .in var {
+   font-style: normal;
+}
+
+.icon-reddit:before {
+   font-family: SocialIcons !important;
+   content: "R";
+   font-size: 1.2em;
+}
+.icon-hackernews:before {
+   font-family: Helvetica, sans-serif !important;
+   content: "Y";
+   font-weight: bold;
+   font-size: .9em;
+}
+
+.stat-url-wrapper {
+   border: 2px solid rgba(204,68,85,.9);
+   background: rgba(60,0,10,.7);
+   box-shadow: inset 2px 2px 5px rgba(0,0,0,.6), 0 0 5px rgba(204,68,85,1);
+   padding: 0 10px;
+   padding-right: 150px;
+}
+
+input[type="text"] {
+   width: 100%;
+   border: 0;
+   font-size: 1.5em;
+   color: #CC4455;
+   font-weight: 300;
+   background: transparent;
+   line-height: 52px;
+   height: 52px;
+   padding: 0;
+   margin: 0;
+   outline: none;
+}
+
+#stat_form {
+   position: relative;
+}
+
+button#stat_submit {
+   position: absolute;
+   top: 3px;
+   right: 3px;
+   height: 50px;
+   border: 0;
+   width: 150px;
+   padding: 0;
+   font-size: 1.4em;
+   font-family: "Oleo Script";
+   color: rgba(60,0,10,.9);
+   background: #DD3344;
+   box-shadow: inset -3px -3px 1px rgba(0,0,0,.1);
+   text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+}
+
+button#stat_submit:hover {
+   background: #EE3344;
+}
+
+button#stat_submit:active {
+   box-shadow: inset 3px 3px 1px rgba(0,0,0,.1);
+   padding-left: 3px;
+   padding-top: 3px;
+   background: #CC2233;
+}
+
+button#stat_submit i {
+   font-size: .75em;
+}
+
+[role='contentinfo'] {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   padding: .5em 0 .2em 0;
+   font-size: .8em;
+   background: rgba(60,0,10,.7);
+   color: #DD3344;
+   text-align: left;
+}
+
+[role='contentinfo'] .vessel {
+   text-align: left;
+   width: 100%;
+}
+
+[role='contentinfo'] .vessel .in {
+   padding: 0 .5em;
+}
+
+[role='contentinfo'] a {
+   color: #FF7788;
+   text-decoration: none;
+}
+
+[role='contentinfo'] a:hover {
+   color: #FFF;
+   text-decoration: none;
+}
+
+.copyright {
+   width: 50%;
+   float: left;
+}
+
+.forkme {
+   float: right;
+   width: 50%;
+   text-align: right;
+}
+
+
+/* ==========================================================================
+   Media Query for Responsive Design.
+   This example overrides the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 660px) {
+   .vessel {
+      width: 640px;
+      padding: 0;
+   }
+}

@@ -10,14 +10,9 @@ end
 
 group :assets do
   guard :shell do
-    watch %r{^assets/js/.+\.js$} do |m|
-      system 'make scripts DEV=1'
-      n "Scripts recompiled (changed file: #{m[0]})"
-    end
-
-    watch %r{^assets/css/.+\.css} do |m|
-      system 'make styles DEV=1'
-      n "Styles recompiled (changed file: #{m[0]})"
+    watch %r{^((assets/(.+/)?.+\.(js|jst|css))|(config/assets.yml))$} do |m|
+      system 'make jammit DEV=1'
+      n "Assets recompiled (changed file: #{m[0]})"
     end
   end
 end

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="http://fonts.googleapis.com/css?family=Oleo+Script|Lato:100,100italic,400,300italic,400italic,700,700italic,900,900italic|Delicious|Junction|Abril+Fatface|Ubuntu+Mono:400,700|Signika+Negative:400,300,600" rel="stylesheet" type="text/css">
-    <link href="/css/style.css?#1" rel="stylesheet" type="text/css" media="screen">
+    <link href="/assets/screen.css?#1" rel="stylesheet" type="text/css" media="screen">
 
     <script type="text/javascript">(function(c,a){window.mixpanel=a;var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.0.min.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?
     g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1})(document,window.mixpanel||[]);
@@ -122,37 +122,7 @@
       </footer>
     </div>
 
-    <script type="text/ejs" id="stat_form_tpl">
-      <div id="stat">
-        <form action="/stat" method="get" id="stat_form">
-          <div class="stat-url-wrapper">
-            <input type="text" name="url" id="stat_url" value="http://">
-          </div>
-          <button id="stat_submit"><i class="icon-search"></i> Stat me</button>
-        </form>
-
-        <div class="clearfix"></div>
-
-        <div class="results">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <% for (var i=0; i < Egoistat.networks.length; i++) { %>
-                  <% n = Egoistat.networks[i] %> 
-                  <td class="network <%= n %>" tag="<%= n %>">
-                    <div class="in">
-                      <i class="icon-<%= n %>"></i> <var class="points">...</var>
-                    </div>
-                  </td>
-                <% } %>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </script>
-
-    <script src="/js/app.js?#1"></script>
+    <script src="/assets/app.js?#1"></script>
     <script src="https://apis.google.com/js/plusone.js"></script>
     <script src="http://platform.twitter.com/widgets.js"></script>
     <script src="/api/v1/stat.js?url=http://egoistat.com/&n=twitter,facebook,plusone&cb=Egoistat.fn.fillSocialCounters"></script>
