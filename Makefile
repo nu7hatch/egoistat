@@ -10,8 +10,11 @@ DEV?=0
 
 all: build precompile_assets
 
-server: build
+server: install
 	$(SERVER)
+
+install:
+	$(GO) install .
 
 build:
 	$(GO) build .
@@ -35,5 +38,5 @@ prepare:
 
 help:
 	@echo "Usage: make [TARGET] [VARS...]"
-	@echo "The targets are: build, test, server, assets, guard, deploy, prepare"
+	@echo "The targets are: build, install, test, server, assets, guard, deploy, prepare"
 	@echo "Defaults: DEV=0; PUBLIC_DIR=public;"
