@@ -43,22 +43,20 @@ deploy_merge_master:
 	$(GIT) reset HEAD .
 	$(GIT) checkout -f production
 	$(GIT) merge master -q --no-commit -s recursive -Xtheirs
-	@$(ECHO)
 
 deploy_prepare:
-	@$(ECHO) "# Building project and precompiling assets..."
+	@$(ECHO) "\n# Building project and precompiling assets..."
 	make build
 	make precompile_assets
-	@$(ECHO)
 
 deploy: deploy_require_clean_tree deploy_merge_master
 	@$(ECHO) $$(($(VERSION)+1)) > VERSION
-	@$(ECHO) "# Commiting changes"
+	@$(ECHO) -e "\n# Commiting changes"
 	$(GIT) add VERSION $(COMPILED_ASSETS_DIR)
 	$(GIT) commit -qm "Build v$(VERSION)"
-	@$(ECHO)
-	@$(ECHO) "# Commited version v$(VERSION), deploying..."
+	@$(ECHO) -e "\n# Version #$(VERSION) ready, deploying..."
 	$(GIT) push heroku '$(PRODUCTION_BRANCH):master'
+	@$(ECHO) -e "\n# Cleaning up..."
 	$(GIT) checkout master
 
 prepare:
