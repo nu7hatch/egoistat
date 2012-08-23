@@ -22,13 +22,13 @@ type redditFeed struct {
 
 func CountRedditPoints(r *Request) *Result {
 	var (
-		resp *http.Response
-		dec *json.Decoder
-		err error
-		feed redditFeed
+		resp    *http.Response
+		dec     *json.Decoder
+		err     error
+		feed    redditFeed
 		feedUrl = fmt.Sprintf(redditFeedUrl, r.Url())
 	)
-	
+
 	if resp, err = http.Get(feedUrl); err != nil {
 		return Empty
 	}

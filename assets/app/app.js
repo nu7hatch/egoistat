@@ -14,6 +14,7 @@ Egoistat.networks = [
     'facebook',
     'plusone',
     'reddit',
+    'pinterest',
     'hackernews'
 ]
 

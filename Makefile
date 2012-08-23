@@ -1,24 +1,26 @@
-SERVER=foreman start
+GO=go
 JAMMIT=jammit
 BUNDLE=bundle
 GEM_INSTALL=gem install --no-ri --no-rdoc
 GUARD=$(BUNDLE) exec guard
 PUBLIC_DIR?=public
+SERVER=foreman start
 DEV_OPTS=
 DEV?=0
 
-all: help
+all: build precompile_assets
 
-help:
-	@echo "Usage: make target [VARS...]"
-	@echo "The targets are: server, assets, guard, deploy, prepare"
-	@echo "Defaults: DEV=0; PUBLIC_DIR=public;"
-
-server:
+server: build
 	$(SERVER)
 
+build:
+	$(GO) build .
+
+test:
+	$(GO) test ./...
+
 precompile_assets:
-	DEV=$(DEV) $(JAMMIT) -f -o $(PUBLIC_DIR)/assets
+	$(JAMMIT) -f -o $(PUBLIC_DIR)/assets
 
 watch_assets:
 	$(GUARD) start -i
@@ -30,3 +32,8 @@ deploy: all
 prepare:
 	$(GEM_INSTALL) bundler
 	$(BUNDLE) install
+
+help:
+	@echo "Usage: make [TARGET] [VARS...]"
+	@echo "The targets are: build, test, server, assets, guard, deploy, prepare"
+	@echo "Defaults: DEV=0; PUBLIC_DIR=public;"

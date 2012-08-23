@@ -14,14 +14,14 @@ type githubFeed struct {
 
 func CountGithubWatchers(r *Request) *Result {
 	var (
-		resp *http.Response
-		dec *json.Decoder
-		err error
-		feed githubFeed
+		resp     *http.Response
+		dec      *json.Decoder
+		err      error
+		feed     githubFeed
 		repoName = r.Option("github_repo")
-		feedUrl = fmt.Sprintf(githubFeedUrl, repoName)
+		feedUrl  = fmt.Sprintf(githubFeedUrl, repoName)
 	)
-	
+
 	if resp, err = http.Get(feedUrl); err != nil {
 		return Empty
 	}

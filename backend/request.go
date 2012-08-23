@@ -29,9 +29,9 @@ func (r *Request) Stat(networks ...string) (results ResultsGroup) {
 	}
 
 	var (
-		fanin = make(chan *Result, len(networks))
+		fanin   = make(chan *Result, len(networks))
 		timeout = time.After(10 * time.Second)
-		jobs = 0
+		jobs    = 0
 	)
 
 	for _, network := range networks {

@@ -14,13 +14,13 @@ type twitterFeed struct {
 
 func CountTweets(r *Request) *Result {
 	var (
-		resp *http.Response
-		dec *json.Decoder
-		err error
-		feed twitterFeed
+		resp    *http.Response
+		dec     *json.Decoder
+		err     error
+		feed    twitterFeed
 		feedUrl = fmt.Sprintf(twitterFeedUrl, r.Url())
 	)
-	
+
 	if resp, err = http.Get(feedUrl); err != nil {
 		return Empty
 	}

@@ -20,13 +20,13 @@ type hackerNewsFeed struct {
 
 func CountHackerNewsPoints(r *Request) *Result {
 	var (
-		resp *http.Response
-		dec *json.Decoder
-		err error
-		feed hackerNewsFeed
+		resp    *http.Response
+		dec     *json.Decoder
+		err     error
+		feed    hackerNewsFeed
 		feedUrl = fmt.Sprintf(hackerNewsFeedUrl, r.Url())
 	)
-	
+
 	if resp, err = http.Get(feedUrl); err != nil {
 		return Empty
 	}

@@ -23,12 +23,16 @@ var counterTests = map[string](func(string) *Request){
 	"reddit": func(url string) *Request {
 		return NewRequest(url, nil)
 	},
+	"pinterest": func(url string) *Request {
+		url = "http://www.makinglearningfun.com/themepages/BrownBearStoryStick.htm"
+		return NewRequest(url, nil)
+	},
 }
 
 func TestRequestCountForCounters(t *testing.T) {
 	for net, test := range counterTests {
 		r := test("http://github.com/")
-		if result := r.Stat(net).Find("net"); result != nil && result.Points == 0 {
+		if result := r.Stat(net).Find(net); result == nil || result.Points == 0 {
 			t.Errorf("Expected to get count from %s, got nothing", net)
 		}
 	}
