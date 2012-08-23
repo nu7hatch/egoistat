@@ -11,7 +11,7 @@ end
 group :assets do
   guard :shell do
     watch %r{^((assets/(.+/)?.+\.(js|jst|css))|(config/assets.yml))$} do |m|
-      system 'make precompile_assets DEV=1'
+      system 'rake assets:precompile DEV=1'
       n "Assets recompiled (changed file: #{m[0]})"
     end
   end
